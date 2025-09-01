@@ -7,10 +7,10 @@ I've been working on a project recently which requires me to programatically con
 
 The most popular julia library for symbolic math is symbolics.jl, and in this package the standard method for generating objects which you can perform algebraic manipulations on is the @variables macro. The behavioour of macros, as it turns out, is less than entirely intuitive. Initially I simply tried 
 
-``` for name in list of nodes
+```
+for name in list of nodes
         symbolicslist = []
         push!(symbolicslist, @variables name)
-        p
 end
 ```
 The output of this was not, as I had been expecting, a list containing the names of my nodes instantiated as symbolic types, but rather a single element list consisting of the element ```name```. And this is how I, as a novice programmer, unknowingly ran into the distinction between runtime evaluation and compile time evaluation. 
