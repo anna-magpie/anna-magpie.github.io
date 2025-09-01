@@ -1,0 +1,5 @@
+title: "Anna Magpie"
+description: "Biology × computation"
+markdown: kramdown
+theme: null
+permalink: /:categories/:year/:month/:day/:title.html
