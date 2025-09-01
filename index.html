@@ -1,269 +1,120 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Anna Magpie — Notes on Julia, Biology & Systems</title>
-  <meta name="description" content="Personal site and blog. Posts on Julia, symbolic math, and computational biology." />
+  <title>Anna Magpie — Biology × Computation</title>
+  <meta name="description" content="Personal site and blog. Notes at the intersection of molecular biology and computation." />
   <meta name="color-scheme" content="light dark">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <!-- Tailwind via CDN -->
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // Tailwind config
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif'] },
-          colors: { brand: { DEFAULT: '#0ea5e9' } }
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+            serif: ['Lora', 'ui-serif', 'Georgia'],
+          },
+          colors: {
+            brand: { DEFAULT: '#2b7a78' }, // teal-green accent
+          }
         }
       },
       darkMode: 'class'
     }
   </script>
-  <!-- Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Markdown renderer -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
   <style>
-    /* Blog content prose styles */
-    .prose :where(pre) { background: var(--tw-prose-pre-bg, rgba(0,0,0,0.04)); padding: 1rem; border-radius: .75rem; overflow: auto; }
-    .prose :where(code):not(pre code) { background: rgba(0,0,0,0.06); padding: .15rem .35rem; border-radius: .375rem; }
-    .dark .prose :where(code):not(pre code) { background: rgba(255,255,255,0.08); }
+    a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: #2b7a78; }
+    header a { text-decoration: none; }
+    .prose :where(pre) { background: rgba(0,0,0,0.05); padding: 1rem; border-radius: .75rem; overflow: auto; }
     .dark .prose :where(pre) { background: rgba(255,255,255,0.06); }
-    .prose img { border-radius: .75rem; }
+    .prose :where(code):not(pre code) { background: rgba(0,0,0,0.08); padding: .15rem .35rem; border-radius: .375rem; }
+    .dark .prose :where(code):not(pre code) { background: rgba(255,255,255,0.08); }
   </style>
-  <script type="application/ld+json" id="ld"></script>
 </head>
-<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+<body class="font-sans bg-[#fdfdfc] text-slate-900 dark:bg-slate-950 dark:text-slate-100">
   <!-- Header -->
-  <header class="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-slate-950/60 border-b border-slate-200/60 dark:border-slate-800/60">
+  <header class="sticky top-0 z-30 backdrop-blur bg-white/70 dark:bg-slate-950/70 border-b border-slate-200 dark:border-slate-800">
     <div class="mx-auto max-w-4xl px-4 py-3 flex items-center justify-between">
-      <a href="#/" class="flex items-center gap-2">
-        <div class="w-9 h-9 rounded-2xl bg-brand/10 text-brand flex items-center justify-center font-black">A</div>
+      <a href="#/" class="flex items-center gap-3">
+        <img src="https://avatars.githubusercontent.com/u/229820172?v=4" alt="Avatar" class="w-10 h-10 rounded-full ring-2 ring-brand/40">
         <div class="font-semibold tracking-tight">Anna Magpie</div>
       </a>
       <nav class="flex items-center gap-5 text-sm">
         <a href="#/blog" class="hover:text-brand">Blog</a>
         <a href="#/about" class="hover:text-brand">About</a>
         <a href="#/contact" class="hover:text-brand">Contact</a>
-        <button id="themeToggle" class="ml-2 rounded-xl border border-slate-200 dark:border-slate-800 px-2.5 py-1.5 text-xs hover:bg-slate-100 dark:hover:bg-slate-900">Toggle theme</button>
+        <button id="themeToggle" class="ml-2 rounded-lg border border-slate-200 dark:border-slate-700 px-2 py-1 text-xs hover:bg-slate-100 dark:hover:bg-slate-900">Toggle theme</button>
       </nav>
     </div>
   </header>
 
   <!-- Main -->
   <main id="app" class="mx-auto max-w-4xl px-4 py-10">
-    <!-- content gets injected here by the tiny router below -->
+    <section class="mb-12 flex items-center gap-6">
+      <img src="https://avatars.githubusercontent.com/u/229820172?v=4" alt="Avatar" class="w-24 h-24 rounded-2xl ring-2 ring-brand/50">
+      <div>
+        <h1 class="text-3xl font-serif font-bold">I’m Anna Magpie.</h1>
+        <p class="mt-2 text-slate-600 dark:text-slate-400 max-w-prose">
+          I work at the intersection of <strong>molecular biology</strong> and <strong>computation</strong>. 
+          This site is where I share essays and notes on Julia, symbolic modeling, and systems biology.
+        </p>
+        <div class="mt-3 flex flex-wrap gap-3">
+          <a href="#/blog" class="px-3 py-1.5 rounded-lg bg-brand/10 text-brand hover:bg-brand/20">Read the blog</a>
+          <a href="#/about" class="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-900">About</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-serif font-semibold mb-4">Latest posts</h2>
+      <div class="grid gap-4">
+        <article class="p-5 border border-slate-200 dark:border-slate-800 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-900 transition">
+          <h3 class="text-lg font-semibold"><a href="#/post/why-care-about-julia" class="hover:text-brand">Why care about Julia</a></h3>
+          <p class="text-xs text-slate-500">2025-08-20 • Julia, performance, multiple-dispatch</p>
+          <p class="text-sm text-slate-600 dark:text-slate-400">A pragmatic case for Julia: dispatch, ergonomics, and velocity for scientific computing.</p>
+        </article>
+        <article class="p-5 border border-slate-200 dark:border-slate-800 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-900 transition">
+          <h3 class="text-lg font-semibold"><a href="#/post/symbolic-math-lessons" class="hover:text-brand">What I wish I had known before doing symbolic math in Julia</a></h3>
+          <p class="text-xs text-slate-500">2025-08-24 • Symbolics.jl, symbolic computation</p>
+          <p class="text-sm text-slate-600 dark:text-slate-400">Hard-earned notes on Symbolics.jl: macros, typing, and performance pitfalls.</p>
+        </article>
+      </div>
+    </section>
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-slate-200/60 dark:border-slate-800/60">
+  <footer class="border-t border-slate-200 dark:border-slate-800">
     <div class="mx-auto max-w-4xl px-4 py-8 text-sm text-slate-500 flex flex-wrap items-center justify-between gap-4">
       <div>© <span id="year"></span> Anna Magpie</div>
       <div class="flex items-center gap-4">
-        <a href="https://github.com/" target="_blank" class="hover:text-brand">GitHub</a>
-        <a href="https://x.com/" target="_blank" class="hover:text-brand">X</a>
+        <a href="https://github.com/anna-magpie" target="_blank" class="hover:text-brand">GitHub</a>
         <a href="mailto:hello@example.com" class="hover:text-brand">Email</a>
-        <a href="/feed.xml" class="hover:text-brand">RSS</a>
       </div>
     </div>
   </footer>
 
-  <!-- --- Posts data (edit/add your posts here) --- -->
+  <!-- Year + Theme toggle -->
   <script>
-    // Minimal blog post data. Add more entries as needed.
-    const POSTS = [
-      {
-        title: 'Why care about Julia',
-        slug: 'why-care-about-julia',
-        date: '2025-08-20',
-        tags: ['Julia', 'performance', 'multiple-dispatch'],
-        summary: 'A pragmatic case for Julia: dispatch, ergonomics, and velocity for scientific computing.',
-        content: `
-Julia exists to collapse the two-language problem: you prototype and ship high-performance code in the same language. Highlights:
-
-- **Multiple dispatch** expresses algorithms over *relationships* between types.
-- **JIT + LLVM** yields C-like performance without hand-written glue.
-- **Parametric types** and **\`UnionAll\`** make generic code fast.
-
-\`julia
-f(x::Vector{T}, y::T) where T = ...
-\`
-
-This signature *constrains* \\(T\\) across arguments, letting the compiler specialize precisely where it matters. The result: fewer layers, fewer rewrites, more insight per unit time.
-        `.trim()
-      },
-      {
-        title: 'What I wish I had known before doing symbolic math in Julia',
-        slug: 'symbolic-math-lessons',
-        date: '2025-08-24',
-        tags: ['Symbolics.jl', 'SymbolicUtils.jl', 'metaprogramming'],
-        summary: 'Hard-earned notes on Symbolics.jl: macros, typing, and performance pitfalls.',
-        content: `
-Key lessons:
-
-1. **Macros expand to real code.** Inspect with \`Meta.@macroexpand\`.
-2. **Know the layers**: SymbolicUtils atoms → Symbolics Num → ModelingToolkit systems.
-3. **Be explicit about types**. Many slowdowns come from unintended unions.
-4. **Cache intermediate results**; symbolic rewriting can be O(n^2+) if you’re careless.
-
-Handy snippet:
-
-\`julia
-using Symbolics
-@variables x y
-simplify(expand((x + y)^3))
-\`
-        `.trim()
-      }
-    ];
-  </script>
-
-  <!-- --- Tiny client-side router & renderer --- -->
-  <script>
-    const app = document.getElementById('app');
-
-    function fmtDate(iso) {
-      const d = new Date(iso + 'T00:00:00Z');
-      return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const root = document.documentElement;
+    const key = 'theme';
+    const saved = localStorage.getItem(key);
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      root.classList.add('dark');
     }
-
-    function setLD(kind, payload) {
-      const el = document.getElementById('ld');
-      el.textContent = JSON.stringify({ '@context': 'https://schema.org', ...payload }, null, 2);
-    }
-
-    function renderHome() {
-      setLD('Person', { '@type': 'Person', name: 'Anna Magpie', url: location.href });
-      app.innerHTML = `
-        <section class="mb-10">
-          <div class="flex items-center gap-5">
-            <img alt="Avatar" src="https://avatars.githubusercontent.com/u/229820172?v=4" class="w-20 h-20 rounded-2xl ring-1 ring-slate-200 dark:ring-slate-800"/>
-            <div>
-              <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight">Hi, I’m Anna.</h1>
-              <p class="text-slate-600 dark:text-slate-400 mt-1 max-w-prose">Academic researcher exploring Julia, symbolic computation, and systems biology. I write about tools and concepts that make complex models tractable.</p>
-              <div class="mt-3 flex flex-wrap gap-2">
-                <a href="#/blog" class="inline-flex items-center gap-2 rounded-2xl px-3 py-1.5 bg-brand/10 text-brand hover:bg-brand/20">Read the blog</a>
-                <a href="#/about" class="inline-flex items-center gap-2 rounded-2xl px-3 py-1.5 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900">About</a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <h2 class="text-xl font-semibold mb-4">Latest posts</h2>
-          <div class="grid gap-4">
-            ${POSTS.slice(0, 3).map(p => `
-              <article class="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 hover:bg-slate-50 dark:hover:bg-slate-900 transition">
-                <h3 class="text-lg font-semibold"><a class="hover:text-brand" href="#/post/${p.slug}">${p.title}</a></h3>
-                <div class="text-xs text-slate-500 mb-2">${fmtDate(p.date)} • ${p.tags.join(', ')}</div>
-                <p class="text-sm text-slate-600 dark:text-slate-400">${p.summary}</p>
-              </article>
-            `).join('')}
-          </div>
-        </section>
-      `;
-    }
-
-    function renderBlog() {
-      setLD('Blog', { '@type': 'Blog', name: 'Anna Magpie — Blog', url: location.href });
-      app.innerHTML = `
-        <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight mb-6">Blog</h1>
-        <div class="grid gap-4">
-          ${POSTS.map(p => `
-            <article class="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 hover:bg-slate-50 dark:hover:bg-slate-900 transition">
-              <h2 class="text-lg font-semibold"><a class="hover:text-brand" href="#/post/${p.slug}">${p.title}</a></h2>
-              <div class="text-xs text-slate-500 mb-2">${fmtDate(p.date)} • ${p.tags.join(', ')}</div>
-              <p class="text-sm text-slate-600 dark:text-slate-400">${p.summary}</p>
-            </article>
-          `).join('')}
-        </div>
-      `;
-    }
-
-    function renderPost(slug) {
-      const p = POSTS.find(p => p.slug === slug);
-      if (!p) {
-        app.innerHTML = `<div class="text-slate-500">Post not found.</div>`;
-        return;
-      }
-      setLD('BlogPosting', { '@type': 'BlogPosting', headline: p.title, datePublished: p.date, mainEntityOfPage: location.href });
-      app.innerHTML = `
-        <article class="prose prose-slate dark:prose-invert max-w-none">
-          <a href="#/blog" class="text-sm no-underline">← Back to blog</a>
-          <h1 class="!mb-1">${p.title}</h1>
-          <p class="mt-0 text-sm text-slate-500">${fmtDate(p.date)} • ${p.tags.join(', ')}</p>
-          <div class="mt-6" id="post-content"></div>
-        </article>
-      `;
-      const html = marked.parse(p.content);
-      document.getElementById('post-content').innerHTML = html;
-    }
-
-    function renderAbout() {
-      setLD('About', { '@type': 'WebPage', name: 'About', url: location.href });
-      app.innerHTML = `
-        <section class="prose prose-slate dark:prose-invert max-w-none">
-          <h1>About</h1>
-          <p>I’m Anna, a researcher working at the intersection of <strong>molecular biology</strong>, <strong>systems modeling</strong>, and <strong>Julia</strong>. This site hosts short notes, deeper dives, and reproducible snippets.</p>
-          <h2>Selected interests</h2>
-          <ul>
-            <li>Mechanistic interpretability in biological systems</li>
-            <li>Symbolic & numeric hybrid workflows (Symbolics.jl, ModelingToolkit)</li>
-            <li>PK/PD & organ-on-chip modeling</li>
-          </ul>
-          <h2>Elsewhere</h2>
-          <ul>
-            <li><a href="https://github.com/" target="_blank">GitHub</a></li>
-            <li><a href="https://x.com/" target="_blank">X</a></li>
-            <li><a href="mailto:hello@example.com">Email</a></li>
-          </ul>
-        </section>
-      `;
-    }
-
-    function renderContact() {
-      setLD('ContactPage', { '@type': 'ContactPage', url: location.href });
-      app.innerHTML = `
-        <section class="prose prose-slate dark:prose-invert max-w-none">
-          <h1>Contact</h1>
-          <p>Best way to reach me is <a href="mailto:hello@example.com">email</a>. For quick questions, DM me on X.</p>
-        </section>
-      `;
-    }
-
-    function router() {
-      const hash = location.hash || '#/';
-      const [_, route, param] = hash.split('/');
-      if (!route) return renderHome();
-      switch (route) {
-        case 'blog': return renderBlog();
-        case 'post': return renderPost(param);
-        case 'about': return renderAbout();
-        case 'contact': return renderContact();
-        default: return renderHome();
-      }
-    }
-
-    window.addEventListener('hashchange', router);
-    window.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('year').textContent = new Date().getFullYear();
-      // Theme toggle
-      const root = document.documentElement;
-      const key = 'theme';
-      const saved = localStorage.getItem(key);
-      if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        root.classList.add('dark');
-      }
-      document.getElementById('themeToggle').addEventListener('click', () => {
-        root.classList.toggle('dark');
-        localStorage.setItem(key, root.classList.contains('dark') ? 'dark' : 'light');
-      });
-      router();
+    document.getElementById('themeToggle').addEventListener('click', () => {
+      root.classList.toggle('dark');
+      localStorage.setItem(key, root.classList.contains('dark') ? 'dark' : 'light');
     });
   </script>
 </body>
 </html>
+
