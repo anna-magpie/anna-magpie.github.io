@@ -6,6 +6,7 @@ tags: [Julia, performance, multiple-dispatch]
 I've been working on a project recently which requires me to programatically convert Boolean DAGs into continuous variable formulations in order to do math on them. This has lead me into a rabbithole of metaprogramming and programmming language theory, this blog post is a documentation of one particular problem I ran into as a result. 
 
 The most popular julia library for symbolic math is symbolics.jl, and in this package the standard method for generating objects which you can perform algebraic manipulations on is the @variables macro. The behavioour of macros, as it turns out, is less than entirely intuitive. Initially I simply tried 
+
 ``` for name in list of nodes
         symbolicslist = []
         push!(symbolicslist, @variables name)
